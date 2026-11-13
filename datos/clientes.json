@@ -1,0 +1,5 @@
+[
+  {"codigo": 1, "nombre": "Ana Gomez", "telefono": "555-1234", "email": "ana@mail.com"},
+  {"codigo": 2, "nombre": "Luis Perez", "telefono": "555-5678", "email": "luis@mail.com"},
+  {"codigo": 3, "nombre": "Marta Diaz", "telefono": "555-9012", "email": "marta@mail.com"}
+]

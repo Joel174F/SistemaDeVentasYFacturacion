@@ -1,0 +1,7 @@
+[
+  {"codigo": 1, "nombre": "Yerba mate 1kg", "precio": 3500.0, "stock": 50},
+  {"codigo": 2, "nombre": "Azucar 1kg", "precio": 1200.0, "stock": 80},
+  {"codigo": 3, "nombre": "Aceite 900ml", "precio": 2800.0, "stock": 40},
+  {"codigo": 4, "nombre": "Fideos 500g", "precio": 1500.0, "stock": 100},
+  {"codigo": 5, "nombre": "Cafe molido 250g", "precio": 4200.0, "stock": 30}
+]
