@@ -1,0 +1,62 @@
+[
+  {
+    "numero": 1,
+    "fecha": "2026-11-16 04:28:33",
+    "cliente_codigo": 0,
+    "cliente_nombre": "Consumidor Final",
+    "items": [
+      {
+        "codigo": 1,
+        "nombre": "Yerba mate 1kg",
+        "precio": 3500.0,
+        "cantidad": 1,
+        "subtotal": 3500.0
+      },
+      {
+        "codigo": 4,
+        "nombre": "Fideos 500g",
+        "precio": 1500.0,
+        "cantidad": 1,
+        "subtotal": 1500.0
+      }
+    ],
+    "totales": {
+      "subtotal": 5000.0,
+      "porcentaje_descuento": 10.0,
+      "descuento": 500.0,
+      "neto": 4500.0,
+      "iva": 945.0,
+      "total": 5445.0
+    }
+  },
+  {
+    "numero": 2,
+    "fecha": "2026-11-16 04:29:18",
+    "cliente_codigo": 4,
+    "cliente_nombre": "flores joel",
+    "items": [
+      {
+        "codigo": 3,
+        "nombre": "Aceite 900ml",
+        "precio": 2800.0,
+        "cantidad": 8,
+        "subtotal": 22400.0
+      },
+      {
+        "codigo": 6,
+        "nombre": "chocolatada",
+        "precio": 1600.0,
+        "cantidad": 10,
+        "subtotal": 16000.0
+      }
+    ],
+    "totales": {
+      "subtotal": 38400.0,
+      "porcentaje_descuento": 25.0,
+      "descuento": 9600.0,
+      "neto": 28800.0,
+      "iva": 6048.0,
+      "total": 34848.0
+    }
+  }
+]
