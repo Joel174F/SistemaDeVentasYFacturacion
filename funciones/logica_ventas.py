@@ -134,4 +134,18 @@ def registrar_venta(carrito, cliente_codigo, cliente_nombre, porcentaje_descuent
     except OSError:
         return True, f"Venta N° {venta['numero']:06d} registrada (no se pudo crear el comprobante)."
 
-    return True, f"Venta N° {venta['numero']:06d} registrada.\nComprobante guardado en:\n{ruta}"
+    mensaje = f"Venta N° {venta['numero']:06d} registrada.\nComprobante guardado en:\n{ruta}"
+
+    # NUEVO: ademas del .txt, generamos el comprobante en PDF.
+    # Si falta la libreria o falla, la venta ya esta registrada igual.
+    ruta_pdf = os.path.splitext(ruta)[0] + ".pdf"
+    try:
+        from funciones.comprobante_pdf import generar_comprobante_pdf
+        generar_comprobante_pdf(venta, ruta_pdf)
+        mensaje += f"\n\nPDF guardado en:\n{ruta_pdf}"
+    except ImportError:
+        mensaje += "\n\n(Para generar el PDF instala la libreria: pip install fpdf2)"
+    except Exception:
+        mensaje += "\n\n(No se pudo crear el PDF)"
+
+    return True, mensaje

@@ -1,10 +1,10 @@
 """
 campo_formulario.py  (COMPONENTE ARMADO)
 Junta una Etiqueta y un CampoTexto en una sola pieza.
-Se usa asi:
     nombre = CampoFormulario(self, "Nombre")
     nombre.pack()
     valor = nombre.obtener()
+horizontal=True pone la etiqueta a la izquierda y el campo a la derecha.
 """
 import tkinter as tk
 import estilos
@@ -13,14 +13,18 @@ from componentes_pequenos.campo_texto import CampoTexto
 
 
 class CampoFormulario(tk.Frame):
-    def __init__(self, padre, texto, ancho=25):
-        super().__init__(padre, bg=estilos.COLORES["fondo"])
+    def __init__(self, padre, texto, ancho=25, horizontal=False):
+        super().__init__(padre, bg=estilos.fondo_de(padre))
 
         self.etiqueta = Etiqueta(self, texto)
-        self.etiqueta.pack(fill="x")
-
         self.campo = CampoTexto(self, ancho)
-        self.campo.pack(fill="x", pady=(0, estilos.ESPACIOS["medio"]))
+
+        if horizontal:
+            self.etiqueta.pack(side="left")
+            self.campo.pack(side="right", ipady=4)
+        else:
+            self.etiqueta.pack(fill="x", pady=(0, 3))
+            self.campo.pack(fill="x", ipady=5, pady=(0, estilos.ESPACIOS["medio"]))
 
     # Estas funciones solo "pasan" la orden al campo de texto de adentro
     def obtener(self):

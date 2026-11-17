@@ -1,11 +1,5 @@
 [
   {
-    "codigo": 1,
-    "nombre": "Ana Gomez",
-    "telefono": "555-1234",
-    "email": "ana@mail.com"
-  },
-  {
     "codigo": 3,
     "nombre": "Marta Diaz",
     "telefono": "555-9012",
@@ -16,5 +10,11 @@
     "nombre": "flores joel",
     "telefono": "3821454699",
     "email": "joelbmxflores@gmail.com"
+  },
+  {
+    "codigo": 5,
+    "nombre": "ernesto gonzalez",
+    "telefono": "23134325",
+    "email": "hefgef@"
   }
 ]

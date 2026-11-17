@@ -1,7 +1,7 @@
 """
 campo_texto.py  (ATOMO)
-La cajita donde el usuario escribe. Le agregamos tres funciones utiles
-para no tener que repetirlas en cada pantalla.
+La cajita donde el usuario escribe, con borde fino que se pinta de azul
+cuando esta seleccionada.
 """
 import tkinter as tk
 import estilos
@@ -13,10 +13,14 @@ class CampoTexto(tk.Entry):
             padre,
             width=ancho,
             font=estilos.FUENTES["normal"],
-            bg="white",
+            bg=estilos.COLORES["blanco"],
             fg=estilos.COLORES["texto"],
-            relief="solid",
-            bd=1,
+            insertbackground=estilos.COLORES["texto"],
+            relief="flat",
+            bd=0,
+            highlightthickness=1,
+            highlightbackground=estilos.COLORES["borde"],
+            highlightcolor=estilos.COLORES["primario"],
         )
 
     def obtener(self):

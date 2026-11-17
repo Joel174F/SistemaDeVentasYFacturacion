@@ -58,5 +58,123 @@
       "iva": 6048.0,
       "total": 34848.0
     }
+  },
+  {
+    "numero": 3,
+    "fecha": "2026-11-16 05:25:51",
+    "cliente_codigo": 4,
+    "cliente_nombre": "flores joel",
+    "items": [
+      {
+        "codigo": 1,
+        "nombre": "Yerba mate 1kg",
+        "precio": 3500.0,
+        "cantidad": 10,
+        "subtotal": 35000.0
+      },
+      {
+        "codigo": 6,
+        "nombre": "chocolatada",
+        "precio": 1600.0,
+        "cantidad": 1,
+        "subtotal": 1600.0
+      },
+      {
+        "codigo": 5,
+        "nombre": "Cafe molido 250g",
+        "precio": 4200.0,
+        "cantidad": 1,
+        "subtotal": 4200.0
+      }
+    ],
+    "totales": {
+      "subtotal": 40800.0,
+      "porcentaje_descuento": 89.0,
+      "descuento": 36312.0,
+      "neto": 4488.0,
+      "iva": 942.48,
+      "total": 5430.48
+    }
+  },
+  {
+    "numero": 4,
+    "fecha": "2026-11-16 21:24:13",
+    "cliente_codigo": 0,
+    "cliente_nombre": "Consumidor Final",
+    "items": [
+      {
+        "codigo": 1,
+        "nombre": "Yerba mate 1kg",
+        "precio": 3500.0,
+        "cantidad": 1,
+        "subtotal": 3500.0
+      },
+      {
+        "codigo": 5,
+        "nombre": "Cafe molido 250g",
+        "precio": 4200.0,
+        "cantidad": 1,
+        "subtotal": 4200.0
+      },
+      {
+        "codigo": 7,
+        "nombre": "yogur",
+        "precio": 3000.0,
+        "cantidad": 1,
+        "subtotal": 3000.0
+      }
+    ],
+    "totales": {
+      "subtotal": 10700.0,
+      "porcentaje_descuento": 8.0,
+      "descuento": 856.0,
+      "neto": 9844.0,
+      "iva": 2067.24,
+      "total": 11911.24
+    }
+  },
+  {
+    "numero": 5,
+    "fecha": "2026-11-16 21:35:05",
+    "cliente_codigo": 4,
+    "cliente_nombre": "flores joel",
+    "items": [
+      {
+        "codigo": 1,
+        "nombre": "Yerba mate 1kg",
+        "precio": 3500.0,
+        "cantidad": 37,
+        "subtotal": 129500.0
+      },
+      {
+        "codigo": 5,
+        "nombre": "Cafe molido 250g",
+        "precio": 4200.0,
+        "cantidad": 1,
+        "subtotal": 4200.0
+      },
+      {
+        "codigo": 7,
+        "nombre": "yogur",
+        "precio": 3000.0,
+        "cantidad": 12,
+        "subtotal": 36000.0
+      },
+      {
+        "codigo": 4,
+        "nombre": "Fideos 500g",
+        "precio": 1500.0,
+        "cantidad": 1,
+        "subtotal": 1500.0
+      }
+    ],
+    "totales": {
+      "subtotal": 171200.0,
+      "porcentaje_descuento": 21.0,
+      "descuento": 35952.0,
+      "neto": 135248.0,
+      "iva": 28402.08,
+      "total": 163650.08
+    }
   }
 ]

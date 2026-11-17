@@ -9,6 +9,7 @@ from componentes_armados.barra_menu import BarraMenu
 from pantallas.pantalla_ventas import PantallaVentas
 from pantallas.pantalla_productos import PantallaProductos
 from pantallas.pantalla_clientes import PantallaClientes
+from pantallas.pantalla_reportes import PantallaReportes
 
 # Diccionario: clave -> clase de la pantalla.
 # Para agregar una pantalla nueva, se agrega una linea aca y una en OPCIONES.
@@ -16,6 +17,7 @@ PANTALLAS = {
     "ventas": PantallaVentas,
     "productos": PantallaProductos,
     "clientes": PantallaClientes,
+    "reportes": PantallaReportes,
 }
 
 # Lista de tuplas (clave, texto del boton). Define el orden del menu.
@@ -23,6 +25,7 @@ OPCIONES = [
     ("ventas", "Ventas"),
     ("productos", "Productos"),
     ("clientes", "Clientes"),
+    ("reportes", "Reportes"),
 ]
 
 
@@ -30,7 +33,8 @@ class Ventana(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Sistema de Ventas y Facturacion")
-        self.geometry("1100x700")
+        self.state("zoomed")
+        self.minsize(1000, 650)
         self.config(bg=estilos.COLORES["fondo"])
 
         # Menu a la izquierda. Le pasamos la funcion que cambia de pantalla.

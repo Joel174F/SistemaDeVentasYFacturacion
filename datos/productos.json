@@ -3,7 +3,7 @@
     "codigo": 1,
     "nombre": "Yerba mate 1kg",
     "precio": 3500.0,
-    "stock": 49
+    "stock": 1
   },
   {
     "codigo": 3,
@@ -15,18 +15,18 @@
     "codigo": 4,
     "nombre": "Fideos 500g",
     "precio": 1500.0,
-    "stock": 24
+    "stock": 23
   },
   {
     "codigo": 5,
     "nombre": "Cafe molido 250g",
     "precio": 4200.0,
-    "stock": 30
+    "stock": 27
   },
   {
-    "codigo": 6,
-    "nombre": "chocolatada",
-    "precio": 1600.0,
-    "stock": 14
+    "codigo": 7,
+    "nombre": "yogur",
+    "precio": 3000.0,
+    "stock": 63
   }
 ]

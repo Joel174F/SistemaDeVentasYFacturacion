@@ -4,6 +4,7 @@ RESPONSABLE: Joel
 Pantalla de nueva venta:
   izquierda -> catalogo de productos + cantidad + "Agregar al carrito"
   derecha   -> cliente, carrito, descuento, totales y "Finalizar venta"
+(Solo cambio el DISEÑO: los metodos de logica son los mismos de antes.)
 """
 import tkinter as tk
 from tkinter import ttk, messagebox
@@ -12,6 +13,8 @@ from componentes_pequenos.etiqueta import Etiqueta
 from componentes_pequenos.boton import Boton
 from componentes_armados.campo_formulario import CampoFormulario
 from componentes_armados.tabla import Tabla
+from componentes_armados.tarjeta import Tarjeta
+from componentes_armados.encabezado_pagina import EncabezadoPagina
 from funciones import calculos, logica_ventas
 
 COLUMNAS_PRODUCTOS = [
@@ -30,12 +33,15 @@ COLUMNAS_CARRITO = [
 
 class PantallaVentas(tk.Frame):
     def __init__(self, padre):
-        super().__init__(padre, bg=estilos.COLORES["fondo"], padx=20, pady=20)
+        super().__init__(padre, bg=estilos.COLORES["fondo"], padx=24, pady=16)
 
         self.carrito = []                              # lista de diccionarios
         self.clientes = logica_ventas.listar_clientes()
 
-        Etiqueta(self, "Nueva venta", "titulo").pack(fill="x", pady=(0, 10))
+        EncabezadoPagina(
+            self, "Nueva venta", "Seleccioná los productos y armá tu carrito",
+            icono=estilos.ICONOS["ventas"],
+        ).pack(fill="x", pady=(0, 14))
 
         self._armar_lado_izquierdo()
         self._armar_lado_derecho()
@@ -43,60 +49,90 @@ class PantallaVentas(tk.Frame):
         self.recargar_productos()
         self.actualizar_totales()
 
-    # ---------- Armado de la pantalla ----------
+    # ---------- Armado de la pantalla (solo diseño) ----------
     def _armar_lado_izquierdo(self):
-        izquierda = tk.Frame(self, bg=estilos.COLORES["fondo"])
+        izquierda = Tarjeta(self, "Productos", estilos.ICONOS["productos"])
         izquierda.pack(side="left", fill="both", expand=True, padx=(0, 20))
 
-        Etiqueta(izquierda, "1. Elegi un producto").pack(fill="x")
+        # Lo de abajo se coloca primero para que nunca quede tapado
+        Boton(
+            izquierda, "Agregar al carrito", self.agregar_al_carrito,
+            icono=estilos.ICONOS["ventas"],
+        ).pack(side="bottom", fill="x")
+
+        self.campo_cantidad = CampoFormulario(izquierda, "Cantidad")
+        self.campo_cantidad.pack(side="bottom", fill="x", pady=(10, 0))
+        self.campo_cantidad.escribir(1)
+
         self.tabla_productos = Tabla(izquierda, COLUMNAS_PRODUCTOS)
         self.tabla_productos.arbol.config(height=8)
         self.tabla_productos.pack(fill="both", expand=True)
-
-        self.campo_cantidad = CampoFormulario(izquierda, "Cantidad")
-        self.campo_cantidad.pack(fill="x", pady=(10, 0))
-        self.campo_cantidad.escribir(1)
-
-        Boton(izquierda, "Agregar al carrito", self.agregar_al_carrito).pack(fill="x")
 
     def _armar_lado_derecho(self):
         derecha = tk.Frame(self, bg=estilos.COLORES["fondo"])
         derecha.pack(side="right", fill="both", expand=True)
 
-        Etiqueta(derecha, "2. Cliente").pack(fill="x")
-        self.lista_clientes = ttk.Combobox(
-            derecha, state="readonly", font=estilos.FUENTES["normal"],
-            values=self.nombres_clientes(),
+        # --- Barra del total (abajo de todo) ---
+        barra_total = tk.Frame(derecha, bg=estilos.COLORES["menu"], padx=16, pady=10)
+        barra_total.pack(side="bottom", fill="x", pady=(10, 0))
+        self.etiqueta_total = Etiqueta(
+            barra_total, "", "total", color=estilos.COLORES["texto_claro"]
         )
-        self.lista_clientes.current(0)   # por defecto: Consumidor Final
-        self.lista_clientes.pack(fill="x", pady=(0, 10))
+        self.etiqueta_total.pack(side="left")
+        Boton(
+            barra_total, "Finalizar venta", self.finalizar,
+            tipo="exito", icono=estilos.ICONOS["ok"],
+        ).pack(side="right")
 
-        Etiqueta(derecha, "3. Carrito").pack(fill="x")
-        self.tabla_carrito = Tabla(derecha, COLUMNAS_CARRITO)
-        self.tabla_carrito.arbol.config(height=5)
-        self.tabla_carrito.pack(fill="both", expand=True)
+        # --- Descuento y desglose ---
+        resumen = tk.Frame(
+            derecha, bg=estilos.COLORES["fondo_suave"], padx=14, pady=10,
+            highlightthickness=1, highlightbackground=estilos.COLORES["borde"],
+        )
+        resumen.pack(side="bottom", fill="x")
 
-        Boton(derecha, "Quitar seleccionado", self.quitar_del_carrito,
-              tipo="peligro").pack(fill="x", pady=(5, 0))
-
-        self.campo_descuento = CampoFormulario(derecha, "Descuento manual (%)")
-        self.campo_descuento.pack(fill="x", pady=(5, 0))
+        self.campo_descuento = CampoFormulario(
+            resumen, "Descuento manual (%)", ancho=10, horizontal=True
+        )
+        self.campo_descuento.pack(fill="x", pady=(0, 6))
         self.campo_descuento.escribir(0)
         # Cada vez que se escribe algo en el descuento, se recalculan los totales
         self.campo_descuento.campo.bind("<KeyRelease>", lambda e: self.actualizar_totales())
 
-        self.etiqueta_subtotal = Etiqueta(derecha, "")
+        self.etiqueta_subtotal = Etiqueta(resumen, "")
         self.etiqueta_subtotal.pack(fill="x")
-        self.etiqueta_descuento = Etiqueta(derecha, "")
+        self.etiqueta_descuento = Etiqueta(resumen, "")
         self.etiqueta_descuento.pack(fill="x")
-        self.etiqueta_iva = Etiqueta(derecha, "")
+        self.etiqueta_iva = Etiqueta(resumen, "")
         self.etiqueta_iva.pack(fill="x")
-        self.etiqueta_total = Etiqueta(derecha, "", "titulo")
-        self.etiqueta_total.pack(fill="x", pady=(0, 5))
 
-        Boton(derecha, "Finalizar venta", self.finalizar).pack(fill="x")
+        # --- Cliente (arriba) ---
+        tarjeta_cliente = Tarjeta(derecha, "Cliente", estilos.ICONOS["cliente"])
+        tarjeta_cliente.pack(side="top", fill="x")
+        self.lista_clientes = ttk.Combobox(
+            tarjeta_cliente, state="readonly", font=estilos.FUENTES["normal"],
+            values=self.nombres_clientes(),
+        )
+        self.lista_clientes.current(0)   # por defecto: Consumidor Final
+        self.lista_clientes.pack(fill="x", ipady=3)
 
-    # ---------- Funciones auxiliares ----------
+        # --- Carrito (ocupa el espacio que sobra) ---
+        tarjeta_carrito = Tarjeta(derecha, "Carrito", estilos.ICONOS["ventas"])
+        tarjeta_carrito.pack(fill="both", expand=True, pady=10)
+
+        Boton(
+            tarjeta_carrito, "Quitar seleccionado", self.quitar_del_carrito,
+            tipo="peligro", icono=estilos.ICONOS["quitar"],
+        ).pack(side="bottom", fill="x", pady=(8, 0))
+
+        self.tabla_carrito = Tabla(
+            tarjeta_carrito, COLUMNAS_CARRITO,
+            mensaje_vacio=estilos.ICONOS["ventas"] + "\nNo hay productos en el carrito",
+        )
+        self.tabla_carrito.arbol.config(height=4)
+        self.tabla_carrito.pack(fill="both", expand=True)
+
+    # ---------- Funciones auxiliares (LOGICA, sin cambios) ----------
     def nombres_clientes(self):
         """Texto de cada opcion de la lista desplegable."""
         opciones = ["0 - Consumidor Final"]
@@ -137,7 +173,7 @@ class PantallaVentas(tk.Frame):
         self.tabla_carrito.cargar(self.carrito)
         self.actualizar_totales()
 
-    # ---------- Botones ----------
+    # ---------- Botones (LOGICA, sin cambios) ----------
     def agregar_al_carrito(self):
         producto = self.tabla_productos.obtener_seleccion()
         if producto is None:
