@@ -39,7 +39,7 @@ def validar_datos(nombre, precio, stock):
 
     # 2. Convertir precio a float y stock a int
     try:
-        precio = float(precio)
+        precio = float(str(precio).strip().replace(",","."))
     except ValueError:
         return False, "El precio debe ser un número", nombre, 0.0, 0
 
