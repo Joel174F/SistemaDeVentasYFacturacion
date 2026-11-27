@@ -64,7 +64,10 @@ def agregar_producto(nombre, precio, stock):
         return False, mensaje
 
     # 4. Leer la lista, agregar el diccionario y guardar
-    productos = cargar_productos()
+    productos=cargar_productos()
+    for p in productos:
+        if p["nombre"].lower() == nombre.lower():
+         return False, "Ya existe un producto con ese nombre"
     nuevo = {
         "codigo": siguiente_codigo(productos),
         "nombre": nombre,
