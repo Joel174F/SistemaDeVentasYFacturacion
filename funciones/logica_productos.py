@@ -55,7 +55,7 @@ def validar_datos(nombre, precio, stock):
         return False, "El stock no puede ser negativo", nombre, precio, stock
     if precio > 1000000:
         return False, "el precio no puede superar 1.000.000",nombre,precio,stock
-    if stock > 1000000:
+    if stock > 100000:
         return False, "el stock no puede superar 100.000",nombre,precio,stock
     return True, "", nombre, precio, stock
 
